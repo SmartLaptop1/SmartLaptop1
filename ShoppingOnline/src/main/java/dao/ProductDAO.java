@@ -465,6 +465,39 @@ public class ProductDAO {
     }
     return list;
     }
+    public long addProductReturnId(Product product, Connection conn) throws SQLException {
+        String sql = "INSERT INTO Product (productName, productCode, categoryId, brandId, priceImport, price, quantity, description, status, Images) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                     
+        long generatedId = -1;
+
+        // Sử dụng conn được truyền vào, KHÔNG MỞ/ĐÓNG kết nối
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) { 
+            
+            ps.setString(1, product.getProductName());
+            ps.setString(2, product.getProductCode());
+            ps.setLong(3, product.getCategoryId());
+            ps.setLong(4, product.getBrandId());
+            ps.setBigDecimal(5, product.getPriceImport());
+            ps.setBigDecimal(6, product.getPrice());
+            ps.setInt(7, product.getQuantity());
+            ps.setString(8, product.getDescription());
+            ps.setInt(9, product.getStatus());
+            ps.setString(10, product.getImages()); // Thêm trường Images
+            
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        generatedId = rs.getLong(1);
+                    }
+                }
+            }
+        } 
+        // KHÔNG CÓ try/catch, để SQLException propagate ra ngoài
+        return generatedId;
+    }
 }
 
     
