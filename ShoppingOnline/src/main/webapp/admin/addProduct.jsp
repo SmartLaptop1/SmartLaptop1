@@ -5,9 +5,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Thêm sản phẩm - TechMart Admin</title>
+    <title>Thêm sản phẩm & Cấu hình - SmartLaptop Admin</title>
 
-    <!-- Bootstrap & Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -27,7 +26,7 @@
         }
 
         .main-content {
-            margin-left: 270px;
+            margin-left: 270px; /* Sidebar width */
             padding: 50px 40px;
             min-height: 100vh;
         }
@@ -37,7 +36,7 @@
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
             padding: 40px 50px;
-            max-width: 900px;
+            max-width: 1000px; /* Tăng chiều rộng để chứa nhiều cột hơn */
             margin: 0 auto;
             transition: 0.4s;
             animation: fadeIn 0.7s ease-in-out;
@@ -48,17 +47,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h2 {
-            font-weight: 700;
-            font-size: 28px;
-            color: #222;
-        }
+        h2 { font-weight: 700; font-size: 28px; color: #222; }
+        h5 { font-weight: 600; color: #444; }
 
         .form-control, .form-select {
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid #ccc;
-            padding: 12px 15px;
-            transition: 0.25s;
+            padding: 10px 15px;
         }
 
         .form-control:focus, .form-select:focus {
@@ -66,17 +61,19 @@
             box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
         }
 
-        .btn-outline-primary {
-            border: 2px solid #667eea;
-            color: #667eea;
+        /* Accordion Custom Style */
+        .accordion-button {
+            background-color: #f1f5f9;
+            color: #333;
             font-weight: 600;
-            border-radius: 10px;
-            transition: 0.3s;
         }
-
-        .btn-outline-primary:hover {
-            background: #667eea;
-            color: white;
+        .accordion-button:not(.collapsed) {
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+        .accordion-body {
+            background-color: #fff;
         }
 
         .btn-submit {
@@ -86,33 +83,20 @@
             border: none;
             padding: 13px 35px;
             border-radius: 12px;
-            transition: all 0.3s ease;
             box-shadow: 0 6px 15px rgba(118, 75, 162, 0.3);
+            transition: 0.3s;
         }
-
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 18px rgba(118, 75, 162, 0.4);
         }
-
+        
         .image-preview {
-            max-width: 200px;
+            max-width: 150px;
             margin-top: 10px;
             display: none;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-            transition: 0.4s ease;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 25px;
-            margin-top: 10px;
-        }
-
-        .radio-group label {
-            font-weight: 500;
-            margin-left: 6px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
     </style>
 </head>
@@ -123,39 +107,29 @@
 <div class="main-content fade-in">
     <div class="form-card">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="fas fa-plus-circle me-2"></i> Thêm sản phẩm mới</h2>
-            <a href="${pageContext.request.contextPath}/admin/productManagement" class="btn btn-outline-primary">
+            <h2><i class="fas fa-plus-circle me-2"></i> Thêm sản phẩm & Cấu hình</h2>
+            <a href="${pageContext.request.contextPath}/admin/productManagement" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-1"></i> Quay lại
             </a>
         </div>
 
-        <!-- Form gửi đến servlet admin/productManagement -->
         <form action="${pageContext.request.contextPath}/admin/productManagement" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add">
 
-            <!-- Admin + mã sản phẩm -->
-            <div class="row mb-4">
+            <h5 class="mb-3 text-primary border-bottom pb-2">1. Thông tin chung</h5>
+            
+            <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="form-label">Admin</label>
-                    <input type="text" class="form-control"
-                           value="<%= ((model.User) session.getAttribute("currentUser")).getFullName() %>"
-                           readonly>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Mã sản phẩm</label>
+                    <label class="form-label">Mã sản phẩm (SKU)</label>
                     <input type="text" class="form-control" name="productCode" placeholder="VD: LAP-DELL-001" required>
                 </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tên sản phẩm</label>
+                    <input type="text" class="form-control" name="productName" placeholder="VD: Dell XPS 13 Plus" required>
+                </div>
             </div>
 
-            <!-- Tên sản phẩm -->
-            <div class="mb-3">
-                <label class="form-label">Tên sản phẩm</label>
-                <input type="text" class="form-control" name="productName"
-                       placeholder="VD: Laptop Dell XPS 13" required>
-            </div>
-
-            <!-- Danh mục & thương hiệu -->
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">Danh mục</label>
                     <select class="form-select" name="categoryId" required>
@@ -176,93 +150,80 @@
                 </div>
             </div>
 
-            <!-- Giá và số lượng -->
-            <div class="row mb-4">
+            <div class="row mb-3">
                 <div class="col-md-4">
-                    <label class="form-label">Giá nhập (VNĐ)</label>
-                    <input type="number" class="form-control" name="priceImport"
-                           placeholder="VD: 12000000" required>
+                    <label class="form-label">Giá nhập</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="priceImport" placeholder="10000000" required>
+                        <span class="input-group-text">VNĐ</span>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Giá bán (VNĐ)</label>
-                    <input type="number" class="form-control" name="price"
-                           placeholder="VD: 15000000" required>
+                    <label class="form-label">Giá bán</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="price" placeholder="12000000" required>
+                        <span class="input-group-text">VNĐ</span>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Số lượng</label>
-                    <input type="number" class="form-control" name="quantity"
-                           placeholder="VD: 10" min="1" required>
+                    <input type="number" class="form-control" name="quantity" value="1" min="1" required>
                 </div>
             </div>
 
-            <!-- Ảnh sản phẩm -->
             <div class="mb-4">
-                <label class="form-label">Ảnh sản phẩm</label>
-
-                <!-- Upload ảnh từ máy -->
-                <input type="file" name="imageFile" class="form-control mb-2" accept="image/*">
-
-                <!-- Hoặc chọn ảnh có sẵn -->
-                <select class="form-select" name="images" id="imageSelect">
-                    <option value="">-- Chọn ảnh có sẵn --</option>
-                    <c:forEach var="img" items="${imageList}">
-                        <option value="${img}">${img}</option>
-                    </c:forEach>
-                </select>
-
-                <img id="imagePreview" class="image-preview" alt="Xem trước ảnh">
+                <label class="form-label">Hình ảnh</label>
+                <input type="file" name="imageFile" class="form-control" accept="image/*" onchange="previewImage(this)">
+                <img id="preview" class="image-preview">
             </div>
 
-
-
-            <!-- Mô tả -->
-            <div class="mb-4">
-                <label class="form-label">Mô tả</label>
-                <textarea class="form-control" name="description" rows="3"
-                          placeholder="Mô tả ngắn về sản phẩm"></textarea>
+            
+            </div>
+            <div class="mt-4">
+                <label class="form-label">Mô tả sản phẩm (Marketing)</label>
+                <textarea class="form-control" name="description" rows="3" placeholder="Mô tả chi tiết về sản phẩm..."></textarea>
             </div>
 
-            <!-- Trạng thái -->
-            <div class="mb-4">
-                <label class="form-label">Trạng thái</label>
-                <div class="radio-group">
-                    <div>
-                        <input type="radio" name="status" id="inStock" value="1" checked>
-                        <label for="inStock">Còn hàng</label>
+            <div class="mt-4">
+                <label class="form-label fw-bold">Trạng thái:</label>
+                <div class="d-flex gap-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="inStock" value="1" checked>
+                        <label class="form-check-label" for="inStock">Còn hàng</label>
                     </div>
-                    <div>
-                        <input type="radio" name="status" id="outStock" value="0">
-                        <label for="outStock">Hết hàng</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="outStock" value="0">
+                        <label class="form-check-label" for="outStock">Hết hàng</label>
                     </div>
                 </div>
             </div>
 
-            <!-- Nút lưu -->
-            <div class="text-end mt-4">
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-check-circle me-2"></i> Lưu sản phẩm
+            <div class="text-end mt-5">
+                <button type="submit" class="btn-submit btn-lg">
+                    <i class="fas fa-save me-2"></i> Lưu sản phẩm
                 </button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Script xem trước ảnh -->
 <script>
-    const imageSelect = document.getElementById("imageSelect");
-    const preview = document.getElementById("imagePreview");
-    const contextPath = "${pageContext.request.contextPath}";
-
-    imageSelect.addEventListener("change", function() {
-        const fileName = this.value;
-        if (fileName) {
-            preview.src = contextPath + "/images/" + fileName;
-            preview.style.display = "block";
+    function previewImage(input) {
+        const preview = document.getElementById('preview');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
         } else {
-            preview.style.display = "none";
+            preview.style.display = 'none';
         }
-    });
+    }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
