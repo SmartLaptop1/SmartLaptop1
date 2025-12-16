@@ -498,6 +498,33 @@ public class ProductDAO {
         // KHÔNG CÓ try/catch, để SQLException propagate ra ngoài
         return generatedId;
     }
+    
+    public List<Product> getProductsByCategory(int categoryId) {
+    List<Product> list = new ArrayList<>();
+    String sql = "SELECT * FROM Product WHERE categoryId = ? AND status = 1";
+
+    try (Connection con = DBConnection.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setInt(1, categoryId);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Product p = new Product();
+            p.setProductId(rs.getInt("productId"));
+            p.setProductName(rs.getString("productName"));
+            p.setPrice(rs.getBigDecimal("price"));
+            p.setImages(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
+            list.add(p);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
 }
 
     

@@ -11,7 +11,7 @@ public class DBConnection {
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/TechMartDB?useSSL=false&serverTimezone=UTC";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "123";
+    private static final String PASSWORD = "123456";
 
     // ✅ Không dùng static connection để tránh lỗi connection closed hoặc chia sẻ connection
     public static Connection getConnection() {
