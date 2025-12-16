@@ -5,6 +5,7 @@ dao\OrderDAO.class
 dao\CategoryDAO.class
 controller\Authentication\UpdateProfileServlet.class
 controller\Brand\AddBrandServlet.class
+controller\User\UpdateUserStatusServlet.class
 controller\Authentication\ResetPasswordServlet.class
 dao\ProductDetailDAO.class
 controller\Authentication\LoginServlet.class
@@ -12,6 +13,7 @@ model\Product.class
 controller\Authentication\ManageConfigServlet.class
 dao\UserDAO.class
 model\UserRole.class
+controller\User\FeedbackFormServlet.class
 constant\Iconstant.class
 controller\Brand\DeleteBrandServlet.class
 model\Cpu.class
@@ -20,6 +22,8 @@ controller\Authentication\ForgotPasswordServlet.class
 model\User.class
 model\Notification.class
 controller\Category\CategoryManagementServlet.class
+controller\User\PaymentServlet.class
+dao\RevenueDAO.class
 service\EmailService$1.class
 controller\Authentication\OTPServlet.class
 dao\RoleDAO.class
@@ -33,15 +37,18 @@ controller\Authentication\AdminDashboardServlet.class
 model\Gpu.class
 dao\BrandDAO.class
 model\Category.class
+controller\User\MyOrdersServlet.class
 dao\ProductDAO.class
 controller\Authentication\HttpServletRequest.class
 service\BCryptInputExample.class
 model\CartItem.class
 connect\DBConnection.class
 model\ProductDetail.class
+controller\User\CheckoutServlet.class
 model\Cart.class
 service\EmailService.class
 dao\CartDAO.class
+controller\User\CategoryServlet.class
 dao\AccountDAO.class
 controller\Category\AddCategoryServlet.class
 model\Review.class
@@ -50,6 +57,7 @@ filter\AuthFilter.class
 controller\Authentication\ReviewManagementServlet.class
 controller\Authentication\StaffManagementServlet.class
 model\Role.class
+controller\User\CartServlet.class
 model\GoogleAccount.class
 controller\Authentication\ProductManagementServlet.class
 dao\AdminDashboardDAO.class
@@ -60,6 +68,7 @@ dao\ReviewDAO.class
 controller\Authentication\LogoutServlet.class
 controller\Authentication\AddProductServlet.class
 dao\ComponentDAO.class
+controller\User\OrderDetailServlet.class
 controller\Authentication\ViewProfileServlet.class
 controller\Authentication\AdminProfileServlet.class
 controller\Category\UpdateCategoryServlet.class
@@ -68,7 +77,11 @@ com\mycompany\ShoppingOnline\JakartaRestConfiguration.class
 model\ShippingHistory.class
 model\OrderItem.class
 com\mycompany\ShoppingOnline\resources\JakartaEE10Resource.class
+controller\User\UserManagementServlet.class
 model\Screen.class
+controller\User\CancelOrderServlet.class
+controller\User\ProductListServlet.class
 service\OTPGenerator.class
 service\VNPayConfig.class
+controller\User\SearchServlet.class
 service\GoogleLogin.class
