@@ -10,6 +10,7 @@ controller\Authentication\ResetPasswordServlet.class
 dao\ProductDetailDAO.class
 controller\Authentication\LoginServlet.class
 model\Product.class
+controller\Staff\ShippingHistoryServlet.class
 controller\Authentication\ManageConfigServlet.class
 dao\UserDAO.class
 model\UserRole.class
@@ -18,6 +19,7 @@ constant\Iconstant.class
 controller\Brand\DeleteBrandServlet.class
 model\Cpu.class
 controller\Brand\UpdateBrandServlet.class
+controller\Shipper\ShipperUpdateOrderServlet.class
 controller\Authentication\ForgotPasswordServlet.class
 model\User.class
 model\Notification.class
@@ -30,6 +32,7 @@ dao\RoleDAO.class
 controller\Authentication\SignupServlet.class
 model\Brand.class
 dao\OrderDetailDAO.class
+controller\Staff\StaffProfileServlet.class
 controller\Authentication\AvatarUploadServlet.class
 dao\StaffDAO.class
 model\Ram.class
@@ -63,6 +66,7 @@ controller\Authentication\ProductManagementServlet.class
 dao\AdminDashboardDAO.class
 dao\ShippingHistoryDAO.class
 controller\Category\DeleteCategoryServlet.class
+controller\Staff\OrderDetailServlet.class
 model\Storage.class
 dao\ReviewDAO.class
 controller\Authentication\LogoutServlet.class
@@ -70,6 +74,7 @@ controller\Authentication\AddProductServlet.class
 dao\ComponentDAO.class
 controller\User\OrderDetailServlet.class
 controller\Authentication\ViewProfileServlet.class
+controller\Staff\UpdateOrderStatusServlet.class
 controller\Authentication\AdminProfileServlet.class
 controller\Category\UpdateCategoryServlet.class
 model\Order.class
@@ -82,6 +87,9 @@ model\Screen.class
 controller\User\CancelOrderServlet.class
 controller\User\ProductListServlet.class
 service\OTPGenerator.class
+controller\Shipper\ShipperProfileServlet.class
+controller\Staff\OrderManagementServlet.class
 service\VNPayConfig.class
+controller\Shipper\ShipperPageServlet.class
 controller\User\SearchServlet.class
 service\GoogleLogin.class
